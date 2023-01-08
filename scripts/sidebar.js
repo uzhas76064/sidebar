@@ -1,8 +1,8 @@
 window.addEventListener('load', () => {
     const menuOption = document.querySelectorAll('.side-element')
-    const menuBtn = document.getElementById('menu-btn')
     const hoverClass = document.querySelector('.hover-bar')
     const sections = document.querySelectorAll('.hover-mid')
+    const menuBtn = document.getElementById('menu-btn')
 
     menuOption.forEach(handleMenuOptions)
 
@@ -24,33 +24,34 @@ window.addEventListener('load', () => {
         item.classList.remove("chosen-section")
     }
 
-    function handleElementOnClick() {
-      if(this.dataset.hover !== undefined) {
-          menuOption.forEach((item) => {
-              item.classList.remove('chosen-section')
-          })
+     function handleElementOnClick() {
+        if(this.dataset.hover !== undefined) {
+            menuOption.forEach((item) => {
+                item.classList.remove('chosen-section')
+            })
 
-          const chosenSection = this.dataset.hover
-          sections.forEach((item) => {
-              if(chosenSection === item.id) {
-                  let containsHover = document.getElementById(chosenSection)
+            const chosenSection = this.dataset.hover
+            sections.forEach((item) => {
+                if(chosenSection === item.id) {
+                    let containsHover = document.getElementById(chosenSection)
 
-                  console.log(containsHover)
+                    console.log(containsHover)
 
-                  switch (containsHover) {
-                      case false:
-                          addActiveClasses(chosenSection, item)
-                          break
+                    switch (containsHover) {
+                        case false:
+                            addActiveClasses(chosenSection, item)
+                            break
 
-                      case true:
-                         removeActiveClasses(chosenSection, item)
-                          break
-                  }
-              }
-              else document.getElementById(item.id).classList.remove('active-hover');
-          })
-      }
+                        case true:
+                            removeActiveClasses(chosenSection, item)
+                            break
+                    }
+                }
+                else document.getElementById(item.id).classList.remove('active-hover');
+            })
+        }
     }
+
 
     const sideBarOptions = document.querySelector(".side-mid");
     menuBtn.addEventListener('click', function(){
