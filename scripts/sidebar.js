@@ -10,6 +10,20 @@ window.addEventListener('load', () => {
         item.addEventListener('click', handleElementOnClick)
     }
 
+    function addActiveClasses(chosenElement, item) {
+        document.getElementById(chosenElement).classList.add('active-hover')
+        hoverClass.classList.add('active-hover')
+        document.querySelector('.main-content').classList.add('mc-extend')
+        item.classList.add('chosen-section')
+    }
+
+    function removeActiveClasses(chosenElement, item) {
+        document.getElementById(chosenElement).classList.remove('active-hover')
+        hoverClass.classList.remove('active-hover')
+        document.querySelector(".main-content").classList.remove("mc-extend")
+        item.classList.remove("chosen-section")
+    }
+
     function handleElementOnClick() {
       if(this.dataset.hover !== undefined) {
           menuOption.forEach((item) => {
@@ -20,25 +34,20 @@ window.addEventListener('load', () => {
           sections.forEach((item) => {
               if(chosenSection === item.id) {
                   let containsHover = document.getElementById(chosenSection)
+
                   console.log(containsHover)
+
                   switch (containsHover) {
                       case false:
-                          document.getElementById(chosenSection).classList.add('active-hover')
-                          hoverClass.classList.add('active-hover')
-                          document.querySelector('.main-content').classList.add('mc-extend')
-                          item.classList.add('chosen-section')
+                          addActiveClasses(chosenSection, item)
                           break
 
                       case true:
-                          document.getElementById(chosenSection).classList.remove('active-hover')
-                          hoverClass.classList.remove('active-hover')
-                          document.querySelector(".main-content").classList.remove("mc-extend")
-                          item.classList.remove("chosen-section")
+                         removeActiveClasses(chosenSection, item)
                           break
                   }
               }
               else document.getElementById(item.id).classList.remove('active-hover');
-
           })
       }
     }
@@ -47,7 +56,7 @@ window.addEventListener('load', () => {
     menuBtn.addEventListener('click', function(){
         let icon;
         let displayCheck = window.getComputedStyle(sideBarOptions).display;
-        if(displayCheck == 'none'){
+        if(displayCheck === 'none'){
             sideBarOptions.style.display = 'block';
             icon = this.querySelector('.fa-bars');
             icon.classList.add('fa-xmark');
